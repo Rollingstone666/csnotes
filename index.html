@@ -1,64 +1,33 @@
+<html>
 <style>
-html {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  font-size: 16px;
-}
-
-body{
-  margin: 0;
-  display: flex;
-  height: 100%;
-  width: 100%;
-  justify-content: center;
-  background: #aecece;
-  align-items: middle;
-}
-
-#app{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: middle;
-}
-#app input {
-  line-height: 1em;
-  padding: 0.5em;
-  font-size: 1.5rem;
-  border: none;
-  background-color: #deeeef;
-  border-radius: 0.5em;
-  color: #104252;
-}
-#buttons {
-  padding: 0.5em 0;
-  align-self: flex-end;
-}
-#buttons button {
-  border: none;
-  color: #deeeef;
-  background-color: #104252;
-  cursor: pointer;
-  padding: 0.5em;
-}
-#content{  
- color: #104252;
-}
-  
-</style>
-
-<div id="app">
+	<div id="app">
   <input type="text" id="input">
   <div id="buttons">
     <button id="button", onclick=buttonTrigger()>update</button>
     <button id="sortButton", onclick=sortButtonTrigger()>sort</button>
     <button id="filterButton", onclick=filterButtonTrigger()>filter</button>
    </div>
+   <!--
+   1.asdfasdf,asdfasdf<br>
+   <li><div class="userName">adsfasdf</div><div class="phoneNumber">adsfasdf</div></li>
+   -->
+  <div id="content"></div>
+</div></style>
+	<div id="app">
+  <input type="text" id="input">
+  <div id="buttons">
+    <button id="button", onclick=buttonTrigger()>update</button>
+    <button id="sortButton", onclick=sortButtonTrigger()>sort</button>
+    <button id="filterButton", onclick=filterButtonTrigger()>filter</button>
+   </div>
+   <!--
+   1.asdfasdf,asdfasdf<br>
+   <li><div class="userName">adsfasdf</div><div class="phoneNumber">adsfasdf</div></li>
+   -->
   <div id="content"></div>
 </div>
-<script>
-  const appContent = document.querySelector('#content')
+	<script>
+	 const appContent = document.querySelector('#content')
 const button = document.querySelector('#button')
 const input = document.querySelector('#input')
 const print = x => {
@@ -70,41 +39,63 @@ const add = x => {
 
 /* let a = input.value
 print(a) */
-let formatno = (e, i) => i + 1 + "." + e + "<br>"
-let arr = []
+let isNumber = a => !isNaN(Number(a))
 let sgnumber = x => (x.substr(0, 3) === "+65" && x.length === 11)
+let formatno = (e, i) => i + 1 + "." + e + "<br>"
+let formatPNP = (e, i) => i + 1 + "." + e.userName + "," + e.phoneNumber + "<br>"
+let formatPNPli =pnp =>"<li>" +
+                             "<div class='userName'>" + pnp.userName + "</div>" +
+                             "<div class='phoneNumber'>" + pnp.phoneNumber + "</div>"
+                      +  "</li>"
+let formatArr = (arrX) => "<ul>" + arrX.map(formatPNPli).join("") + "</ul>"
+let makePhoneNumberPair = (usr, pn) => {
+  return {
+    userName: usr,
+    phoneNumber: pn
+  }
+}
+let phoneNumbers = {
+	arr: [],
+  add: pnp => phoneNumbers.arr.push(pnp),
+  sort: () => phoneNumbers.arr.sort(
+        (x, y) => (x.userName > y.userName) ? 1 : -1),
+  getsg: () => phoneNumbers.arr.filter(x => sgnumber(x.phoneNumber)),
+  format: () => formatArr(phoneNumbers.arr)
+}
+
+let filtered = false
 const buttonTrigger = () => {
   a = input.value
   let b
-  if (!isNaN(Number(a)) ){
-    arr.push(a)
-    print(arr.map(formatno).join(""))
+  if (isNumber(a.split(",")[1])){
+  	phoneNumbers.add(makePhoneNumberPair(a.split(",")[0], a.split(",")[1]))
+    print(phoneNumbers.format()) 
+    filtered = false
   }
   else {
-    ( b = "This is not a Phone number!")
-    print(b + "<br>" + arr.map(formatno).join(""))
+    ( b = "This is not a Valid Input!")
+    print(b + "<br>" + phoneNumbers.format())
   
   }             
  }
 
 const sortButtonTrigger = () => {
-    arr.sort()
- print(arr.map(formatno).join(""))
+    phoneNumbers.sort()
+  print(phoneNumbers.format())
 }
-let counter = 0
 const filterButtonTrigger = () => { 
-		counter = counter + 1
-    if (counter/2 !== parseInt(counter/2)){
-    print(arr.map(formatno).join(""))
+		filtered = !filtered
+    if (!filtered){
+      print(phoneNumbers.format())
     }
     else {
-    arr2 = arr.filter(sgnumber)
-    print(arr2.map(formatno).join(""))
+    arr2 = phoneNumbers.getsg()
+    print(formatArr(arr2))
     }
 }
 //let i = 100
 //while (i >= 0) {
 //	add(i + "<br>")
 //  i -= 1
-//}
-</script>
+//}</script>
+	</html>
