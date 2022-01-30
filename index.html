@@ -1,1 +1,110 @@
-hi
+<style>
+html {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  font-size: 16px;
+}
+
+body{
+  margin: 0;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  background: #aecece;
+  align-items: middle;
+}
+
+#app{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: middle;
+}
+#app input {
+  line-height: 1em;
+  padding: 0.5em;
+  font-size: 1.5rem;
+  border: none;
+  background-color: #deeeef;
+  border-radius: 0.5em;
+  color: #104252;
+}
+#buttons {
+  padding: 0.5em 0;
+  align-self: flex-end;
+}
+#buttons button {
+  border: none;
+  color: #deeeef;
+  background-color: #104252;
+  cursor: pointer;
+  padding: 0.5em;
+}
+#content{  
+ color: #104252;
+}
+  
+</style>
+
+<div id="app">
+  <input type="text" id="input">
+  <div id="buttons">
+    <button id="button", onclick=buttonTrigger()>update</button>
+    <button id="sortButton", onclick=sortButtonTrigger()>sort</button>
+    <button id="filterButton", onclick=filterButtonTrigger()>filter</button>
+   </div>
+  <div id="content"></div>
+</div>
+<script>
+  const appContent = document.querySelector('#content')
+const button = document.querySelector('#button')
+const input = document.querySelector('#input')
+const print = x => {
+	appContent.innerHTML = x
+}
+const add = x => {
+	appContent.innerHTML += x
+}
+
+/* let a = input.value
+print(a) */
+let formatno = (e, i) => i + 1 + "." + e + "<br>"
+let arr = []
+let sgnumber = x => (x.substr(0, 3) === "+65" && x.length === 11)
+const buttonTrigger = () => {
+  a = input.value
+  let b
+  if (!isNaN(Number(a)) ){
+    arr.push(a)
+    print(arr.map(formatno).join(""))
+  }
+  else {
+    ( b = "This is not a Phone number!")
+    print(b + "<br>" + arr.map(formatno).join(""))
+  
+  }             
+ }
+
+const sortButtonTrigger = () => {
+    arr.sort()
+ print(arr.map(formatno).join(""))
+}
+let counter = 0
+const filterButtonTrigger = () => { 
+		counter = counter + 1
+    if (counter/2 !== parseInt(counter/2)){
+    print(arr.map(formatno).join(""))
+    }
+    else {
+    arr2 = arr.filter(sgnumber)
+    print(arr2.map(formatno).join(""))
+    }
+}
+//let i = 100
+//while (i >= 0) {
+//	add(i + "<br>")
+//  i -= 1
+//}
+</script>
