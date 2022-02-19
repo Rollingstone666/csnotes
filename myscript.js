@@ -3,13 +3,15 @@ const appContent = document.querySelector('#content')
 // const button = document.querySelector('#button')
 const input = document.querySelector('#input')
 const input2 = document.querySelector('#input2')
+const input3 = document.querySelector('#input3')
+const password = document.querySelector('#password')
+const users =document.querySelector('#users')
 const print = x => {
     appContent.innerHTML = x
 }
 const add = x => {
     appContent.innerHTML += x
 }
-
 /* let a = input.value
 print(a) */
 let isNumber = a => !isNaN(Number(a))
@@ -19,7 +21,8 @@ let formatPNP = (e, i) => i + 1 + "." + e.userName + "," + e.phoneNumber + "<br>
 let formatPNPli = user => "<li>" +
     "<div class='userName'>" + user.userName + "</div>" +
     "<div class='phoneNumber'>" + user.phoneNumber + "</div>" +
-    "<div class='nationality'>" + user.nationality + "</div>"
+    "<div class='nationality'>" + user.nationality + "</div>" +
+    "<div class='password'>" + ("*").repeat(user.password.length) + "</div>"
     + "</li>"
 let formatArr = (arrX) => "<ul>" + arrX.map(formatPNPli).join("") + "</ul>"
 let phoneNumbers = {
@@ -38,16 +41,17 @@ const buttonTrigger = () => {
         let newEntry = {
             userName: input.value,
             phoneNumber: input2.value,
-            nationality: input3.value
+            nationality: input3.value,
+            password: password.value
         }// makePhoneNumberPair(userName, phoneNumber)
         phoneNumbers.add(newEntry)
         print(phoneNumbers.format())
         filtered = false
+        users.innerHTML = "(" + phoneNumbers.arr.length + ")"
     }
     else {
         (b = "This is not a Valid Input!")
         print(b + "<br>" + phoneNumbers.format())
-
     }
 }
 
@@ -70,11 +74,14 @@ const resetButtonTrigger = () => {
     input.value = ""
     input2.value = ""
     input3.value = ""
+    password.value = ""
     phoneNumbers.arr = []
     print("<center>Entries cleared!</center>")
+    users.innerHTML = "(" + phoneNumbers.arr.length + ")"
 }
+users.innerHTML = "(" + phoneNumbers.arr.length + ")"
 //let i = 100
 //while (i >= 0) {
 //	add(i + "<br>")
 //  i -= 1
-//}</script>
+//}</script>li
