@@ -46,4 +46,7 @@ html {
   #content{  
    color: #104252;
   }
-  
+  .userName{
+    font-size: 1.5em;
+    color: #fc05059f;
+  }

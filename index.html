@@ -1,6 +1,7 @@
 <html>
 
 <head>
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -11,14 +12,16 @@
       <input placeholder="username"type="text" id="input">
       <input placeholder="phonenumber"type="text" id="input2">
       <input placeholder="nationality"type="text" id="input3">
-      <input placeholder="password" type="password" id="password">
+      <input class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"placeholder="password" type="password" id="password">
 
     </div>
+    <input class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md">
     <div id="buttons">
       <button id="button" , onclick=buttonTrigger()>update</button>
       <button id="sortButton" , onclick=sortButtonTrigger()>sort</button>
       <button id="filterButton" , onclick=filterButtonTrigger()>filter</button>
       <button id="clearButton" , onclick=resetButtonTrigger()>clear</button>
+      <button id="downLoadButton" , onclick=downLoadButtonTrigger()>download</button>
     </div>
     <div id="content"></div>
   </div>
