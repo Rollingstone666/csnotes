@@ -1,32 +1,51 @@
+const range = n => [...Array(n).keys()]
+let x = 0
+let counter = []
+
+while (x < 9) {
+    x = x + 1
+    counter.push(x)
+}
+
 const app = document.querySelector("#app")
+const middlePart = counter.map(x => `<div class="col-sm x${x}"> </div>`).join("")
+let a = counter.map(x => `<div class="row y${x}">${middlePart} </div>`).join("")
+app.innerHTML = a
+
+let coordx = 2
+let coordy = 2
 console.log(app.style.width)
-let a = 5
-let b = 10
+const updateCoord = (x, y) => {selected = document.querySelector(`#app .y${x} .x${y}`)
+selected.classList.add("hightlighted")
+
+}
+//selected.classList.remove("asdkfj")
+updateCoord(coordx, coordy)
 document.addEventListener('keydown', event => {
     if (event.code == "ArrowLeft") {
-        if (a > 0) {
-            a = a - 1
-            app.style.width = String(a) + "em"
+        if (coordy > 1) {
+            coordy = coordy - 1
         }
-        else app.style.width = 0
     }
     else if (event.code == "ArrowRight") {
-        a = a + 1
-        app.style.width = String(a) + "em"
+        coordy = coordy + 1
+    if (coordy > 9){
+        coordy = 9
+        }
     }
     else if (event.code == "ArrowUp") {
-        if (b > 0){
-            b = b -1
-            app.style.height = String(b) + "em"
+        if (coordx > 1) {
+            coordx = coordx - 1
         }
-        else app.style.height = 0
-
     }
     else if (event.code == "ArrowDown") {
-        b = b + 1
-        app.style.height = String(b) + "em"
+        coordx = coordx + 1
+        if (coordx > 9) {
+            coordx = 9
+        }
 
     }
-})  
+    updateCoord(coordx, coordy)
+})
 
 
