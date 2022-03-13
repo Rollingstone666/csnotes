@@ -85,7 +85,9 @@ const resetButtonTrigger = () => {
 const downLoadButtonTrigger = () => {
     const content = phoneNumbers.formatCsv()
     window.open(
-        encodeURI("data:text/csv;charset=utf-8," + content)
+        encodeURI("data:text/csv;charset=utf-8," + 
+        "username" + "," + "phonenumber" + "," + "nationality" + "," + "password" + "\n"
+         + content)
     )
 }
 users.innerHTML = "(" + phoneNumbers.arr.length + ")"
