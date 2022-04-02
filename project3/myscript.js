@@ -16,19 +16,42 @@ const formatTeam = team => `<div class="col-md-6">
             <div class="mb-1 text-muted">Wins:${team.wins}, Losses:${team.losses}</div>
             <p class="mb-auto fs-5 text-muted">${formatDate(team)}</p>
             <div>
-            <button type="button" class="w-px-4 btn btn-lg btn-outline-primary">Readmore</button>        
+            <button type="button" class="w-px-4 btn btn-lg btn-outline-primary" id="button-${team.team_id}" onclick="buttonTrigger( '${team.team_id}')">Readmore</button>        
+            <div id="content-${team.team_id}" class="invisible"></div>
             </div>
             </div>
         <div class="col-auto d-none d-lg-block"><img src='${team.logo_url}'alt='logo'>
         </div>
     </div>
 </div>`
+let buttonTrigger = (x) => { alert(x) }
+
 fetch(url).then(
     response => response.json()
 ).then(data => {
+    buttonTrigger = x => {
+        let readmore = document.querySelector(`#button-${x}`)
+        let readmoreContent = document.querySelector(`#content-${x}`)
+        data.filter(t => t.team_id == x).map(team => {
+            readmore.classList.add("invisible")
+            readmoreContent.classList.remove("invisible")
+            fetch(`${url}/${x}/players`).then(
+                responsePlayer => responsePlayer.json()
+            ).then(playerData => {
+                let playerNames = playerData.filter(x => x.name !== null && x.name !== " " && x.is_current_team_member === true).map(x => {
+                    let active = "" 
+
+                    return `<li class='list-group-item  ${active}'><a class="link-secondary" href="player.html">` + x.name + "</a></li>"
+                }).join("")
+                readmoreContent.innerHTML = playerNames
+            }).catch(() => {
+                console.log("No team players info received for" + t.name)
+            }
+            )
+
+        })
+    }
     app.innerHTML = data.map(formatTeam).join("")
-    //app.innerHTML = data.map(x => "<img src='" + x.logo_url + "'" + "alt='logo'" + ">")
-    //console.log(data.map(x => "<img src='" + x.logo_url + "'" +">") + "alt='logo'" + ">")
 }
 ).catch(() =>
     console.log("No data received")
