@@ -9,13 +9,16 @@ const formatDate = x => {
     return `${a.getFullYear()}/${a.getMonth()}/${a.getDate()}`
 }
 const formatTeam = team => `<div class="col-md-6">
-    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+    <div class="row g-0 border class="rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static">
             <strong class="d-inline-block mb-2 text-success">Team</strong>
             <h3 class="mb-0">${team.name}</h3>
             <div class="mb-1 text-muted">Wins:${team.wins}, Losses:${team.losses}</div>
-            <p class="mb-auto">${formatDate(team)}</p>
-        </div>
+            <p class="mb-auto fs-5 text-muted">${formatDate(team)}</p>
+            <div>
+            <button type="button" class="w-px-4 btn btn-lg btn-outline-primary">Readmore</button>        
+            </div>
+            </div>
         <div class="col-auto d-none d-lg-block"><img src='${team.logo_url}'alt='logo'>
         </div>
     </div>
@@ -23,11 +26,7 @@ const formatTeam = team => `<div class="col-md-6">
 fetch(url).then(
     response => response.json()
 ).then(data => {
-    mb0.innerHTML = data[0].name
-    mb1.innerHTML = `Wins:${data[0].wins}, Losses:${data[0].losses}`
-    cardtext.innerHTML = formatDate(data[0])
-    logo.innerHTML = `<img src='${data[0].logo_url}'alt='logo'>`
-    app.innerHTML = data.map(formatTeam)
+    app.innerHTML = data.map(formatTeam).join("")
     //app.innerHTML = data.map(x => "<img src='" + x.logo_url + "'" + "alt='logo'" + ">")
     //console.log(data.map(x => "<img src='" + x.logo_url + "'" +">") + "alt='logo'" + ">")
 }
