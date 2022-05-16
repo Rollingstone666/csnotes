@@ -8,7 +8,8 @@ const formatDate = x => {
     let a = new Date((x.last_match_time) * 1000)
     return `${a.getFullYear()}/${a.getMonth()}/${a.getDate()}`
 }
-const formatTeam = team => `<div class="col-md-6">
+const formatTeam = team => 
+`<div class="col-md-6">
     <div class="row g-0 border class="rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static">
             <strong class="d-inline-block mb-2 text-success">Team</strong>
@@ -24,7 +25,7 @@ const formatTeam = team => `<div class="col-md-6">
         </div>
     </div>
 </div>`
-let buttonTrigger = (x) => { alert(x) }
+let buttonTrigger
 
 fetch(url).then(
     response => response.json()
@@ -35,15 +36,14 @@ fetch(url).then(
         data.filter(t => t.team_id == x).map(team => {
             readmore.classList.add("invisible")
             readmoreContent.classList.remove("invisible")
+            let match = `<li class='list-group-item'><a class="link-secondary" href="matches.html?${x}">matches</a></li>`
             fetch(`${url}/${x}/players`).then(
                 responsePlayer => responsePlayer.json()
             ).then(playerData => {
                 let playerNames = playerData.filter(x => x.name !== null && x.name !== " " && x.is_current_team_member === true).map(x => {
-                    let active = "" 
-
-                    return `<li class='list-group-item  ${active}'><a class="link-secondary" href="player.html">` + x.name + "</a></li>"
+                    return `<li class='list-group-item'><a class="link-secondary" href="player.html?id=${x.account_id}">` + x.name + "</a></li>"
                 }).join("")
-                readmoreContent.innerHTML = playerNames
+                readmoreContent.innerHTML = playerNames + match
             }).catch(() => {
                 console.log("No team players info received for" + t.name)
             }
@@ -56,3 +56,4 @@ fetch(url).then(
 ).catch(() =>
     console.log("No data received")
 )
+ 
