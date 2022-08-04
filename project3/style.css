@@ -6,3 +6,54 @@
     padding: 3em
     
 }
+.hero{
+    display: block;
+    padding: 2em;
+    border: solid 1px #a8a2a2;
+    border-radius: 1em;
+    margin-right: 1em
+}
+.hero i{
+    float: right
+}
+.HTdraft{
+    padding: 5em;
+    display: flex;
+    flex-direction: column;
+}
+.GTdraft{
+    padding: 5em;
+    display: flex;
+    flex-direction: column;
+}
+.networth-hero{
+    width: 3em;
+}
+.networth-row{
+    display: flex;
+    flex-direction: row;
+    padding: 3px 0;
+}
+.networth-barR{
+    background-color: rgb(32, 212, 62);
+    width : 100%;
+}
+.networth-barD{
+    background-color: rgb(140, 9, 27);
+    width : 100%;
+}
+header input{
+    padding: 0.5em 1em;
+    margin: 2em 2em 2em 0;
+    width: 50%;
+}
+.team{
+    padding: 2em 0 2em 0;  
+}
+.team img{
+    padding: 2em 0 2em 0;
+    width: 12em;
+}
+.teaminner{
+    padding: 0 16em 0 16em;
+}

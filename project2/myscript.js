@@ -19,10 +19,10 @@ let oldy = 2
 console.log(app.style.width)
 const updateCoord = (x, y, oldx, oldy) => {
     console.log(x, y, oldx, oldy)
-selected = document.querySelector(`#app .y${y} .x${x}`)
-unselected = document.querySelector(`#app .y${oldy} .x${oldx}`)
-selected.classList.add("hightlighted")
-unselected.classList.remove("hightlighted")
+    selected = document.querySelector(`#app .y${y} .x${x}`)
+    unselected = document.querySelector(`#app .y${oldy} .x${oldx}`)
+    selected.classList.add("hightlighted")
+    unselected.classList.remove("hightlighted")
 }
 //selected.classList.remove("asdkfj")
 updateCoord(coordx, coordy, oldx, oldy)
@@ -38,10 +38,10 @@ document.addEventListener('keydown', event => {
         oldx = coordx
         oldy = coordy
         coordx = coordx + 1
-    if (coordx > 9){
-        coordx = 9
-        oldy = coordy
-        oldx = coordx - 1
+        if (coordx > 9) {
+            coordx = 9
+            oldy = coordy
+            oldx = coordx - 1
         }
     }
     else if (event.code == "ArrowUp") {
@@ -64,5 +64,3 @@ document.addEventListener('keydown', event => {
     }
     updateCoord(coordx, coordy, oldx, oldy)
 })
-
-
