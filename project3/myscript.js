@@ -31,7 +31,7 @@ const formatDate = x => {
 }
 const formatTeam = team =>
     `<div class="col-md-15 team" id="search-${team.team_id}">
-    <div class="teaminner row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+    <div class="teaminner row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static">
             <strong class="d-inline-block mb-2 text-success">Team</strong>
             <h3 class="mb-0">${team.name}</h3>
@@ -42,7 +42,7 @@ const formatTeam = team =>
             <div id="content-${team.team_id}" class="invisible"></div>
             </div>
             </div>
-        <div class="col-auto d-none d-lg-block"><img src='${team.logo_url}'alt='logo'>
+        <div class="col-auto d-lg-block"><img src='${team.logo_url}'alt='logo'>
         </div>
     </div>
 </div>`

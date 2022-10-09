@@ -55,5 +55,7 @@ header input{
     width: 12em;
 }
 .teaminner{
-    padding: 0 16em 0 16em;
+    box-shadow: #999595 5px 5px 5px;
+    background-color: #dddddd;
+    padding: 0 10vw 0 10vw;
 }
